@@ -1,0 +1,14 @@
+node_modules
+
+# Logs
+logs
+*.log
+
+# Compiled binary addons (http://nodejs.org/api/addons.html)
+build
+
+# IDE/Editor data
+.idea
+
+# git目录
+.git
