@@ -4,5 +4,4 @@ export const ENV = {
     },
     appName: '爱用商品',
     picUrl: '//q.aiyongtech.com/tiktok/item/web/images/',
-    version: '0.0.1',
 };
