@@ -4,11 +4,10 @@ import { getJsonOrDie } from './script/utils.mjs';
 
 /** 根据命令行入参，定义模式常量 */
 const MODE = process?.argv?.includes('-m=development') ? 'development' : '';
-/** 根据命令行入参，定义模式常量 */
+const type = process?.argv?.[5] ? process?.argv?.[5] : 'pord';
 const { version } = getJsonOrDie('package.json');
 /** 构造静态资源依赖路径 */
-const base = MODE ? `https://q.aiyongtech.com/tiktok/item/pord/${version}` : '';
-
+const base = MODE ? `https://q.aiyongtech.com/tiktok/item/${type}/${version}` : '';
 // https://vitejs.dev/config/
 export default defineConfig({
   mode: MODE,
@@ -21,7 +20,7 @@ export default defineConfig({
   base,
   build: {
       target: 'es2015',
-      outDir: 'build',
+      outDir: `build/${version}`,
       rollupOptions: {
           output: {
               // 线上是非覆盖式发布，URL带版本号，构建产物的[hash]没有意义，所以禁用掉
@@ -35,7 +34,7 @@ export default defineConfig({
       alias: {
           assets: '/src/assets',
           constants: '/src/constants',
-          util: '/src/public/util',
+          utils: '/src/public/utils',
           public: '/src/public',
           pages: '/src/pages',
           components: '/src/components',

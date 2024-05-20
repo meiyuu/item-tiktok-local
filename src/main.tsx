@@ -4,18 +4,20 @@ import { Provider } from 'react-redux';
 import qs from 'qs';
 import { store } from './store';
 import Routers from './routes';
-import './index.less';
+import { userInfoInit } from 'utils/userInfo';
+import './index.scss';
 
 declare global {
   interface Window {
-      userInfo: { userId: number, nick: string };
-      parseParams: { [key: string]: any };
+    userInfo: Record<string, any>;
+    parseParams: Record<string, any>;
   }
 }
 
-const parsedParams = qs.parse(location.search.slice(1));
+const parsedParams: Record<string, any> = qs.parse(location.search.slice(1));
 window.parseParams = parsedParams;
-console.log('路由参数', location);
+console.log('路由参数', location, parsedParams);
+userInfoInit({ shop_region: parsedParams?.shop_region });
 
 const rootElement = document.getElementById('root');
 ReactDOM.createRoot(rootElement!).render(
